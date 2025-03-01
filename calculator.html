@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .calculator {
+            display: inline-block;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            max-width: 300px;
+        }
+
+        h2 {
+            color: #444;
+        }
+
+        input {
+            width: 260px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 24px;
+            text-align: right;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: #0f0;
+            font-weight: bold;
+            box-shadow: inset 0px 0px 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 65px);
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            color: white;
+        }
+
+        /* Button Colors */
+        button:nth-child(1), button:nth-child(2), button:nth-child(3), button:nth-child(5),
+        button:nth-child(6), button:nth-child(7), button:nth-child(9), button:nth-child(10),
+        button:nth-child(11), button:nth-child(13) {
+            background: #3498db;
+        }
+
+        button:nth-child(4), button:nth-child(8), button:nth-child(12), button:nth-child(16) {
+            background: #f39c12;
+        }
+
+        button:nth-child(14) { /* Clear Button */
+            background: #e74c3c;
+        }
+
+        button:nth-child(15) { /* Equals Button */
+            background: #2ecc71;
+        }
+
+        /* Hover Effects */
+        button:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        /* Click Effect */
+        button:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Colorful Calculator</h2>
+        <input type="text" id="display" readonly>
+        <div class="buttons">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>-</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>*</button>
+            <button>0</button>
+            <button>C</button>
+            <button>=</button>
+            <button>/</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const display = document.getElementById("display");
+            const buttons = document.querySelectorAll(".buttons button");
+
+            let currentInput = "";
+
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const value = this.textContent;
+
+                    if (value === "=") {
+                        try {
+                            currentInput = eval(currentInput);
+                        } catch {
+                            currentInput = "Error";
+                        }
+                    } else if (value === "C") {
+                        currentInput = "";
+                    } else {
+                        currentInput += value;
+                    }
+
+                    display.value = currentInput;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
